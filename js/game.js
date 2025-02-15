@@ -2,6 +2,8 @@
 
 import { gameData } from "./data.js"; // Or require('./data.js') if using CommonJS
 import { setupDragDrop } from "./drag-drop.js";
+import { showFeedback, updateScoreDisplay, createSubmitButton } from "./ui.js";
+
 // Function to start a new game
 function startGame() {
   // Get container for cards
@@ -12,7 +14,6 @@ function startGame() {
   // Get category and items, store correct order
   const selectedCategory = selectRandomCategory();
   const items = shuffleItems(selectedCategory);
-  const correctOrder = items.map((item) => item.name);
 
   // Update category and unit display
   const categorySpan = document.getElementById("currentCategory");
@@ -27,8 +28,6 @@ function startGame() {
   createCards(items);
 
   setupDragDrop();
-
-  return correctOrder; // This will be useful later for checking answers
 }
 
 // Function to select a random category from the gameData
@@ -49,31 +48,59 @@ function shuffleItems(category) {
   }));
 }
 
+function createCorrectOrder(items) {
+  // Sort items by value in descending order (highest to lowest)
+  const sortedItems = [...items].sort((a, b) => b.value - a.value);
+  return sortedItems.map((item) => item.name);
+}
+
 // Function to create and inject 7 cards with the items
 function createCards(items) {
   const container = document.getElementById("card-container");
+  container.innerHTML = ""; // Clear existing content
 
+  // Store the full item data in the card's dataset
   items.forEach((item) => {
     const card = document.createElement("div");
     card.classList.add("draggable-card");
     card.setAttribute("draggable", true);
     card.textContent = item.name;
+    card.dataset.itemName = item.name;
+    card.dataset.value = item.value; // Add the value to the dataset
     container.appendChild(card);
   });
+
+  // Add submit button and evaluation logic
+  const handleSubmit = () => {
+    const cards = container.querySelectorAll(".draggable-card");
+    const userOrder = Array.from(cards).map((card) => card.dataset.itemName);
+    const correctOrder = createCorrectOrder(items);
+    const { score, correctPositions } = evaluateOrder(userOrder, correctOrder);
+
+    // Show feedback
+    const isCorrect = score === userOrder.length;
+    const message = isCorrect
+      ? "Perfect! You got them all correct!"
+      : `You got ${score} out of ${userOrder.length} correct. Try again!`;
+
+    showFeedback(isCorrect, message, correctPositions);
+    updateScoreDisplay(score, userOrder.length);
+  };
+
+  const submitButton = createSubmitButton(handleSubmit);
+  container.appendChild(submitButton);
 }
 
 // Function to evaluate the user's order of items
 function evaluateOrder(userOrder, correctOrder) {
-  // Compare the user's order with the correct order
-  // Calculate the score (number of correct placements)
-  // Return the score
   let score = 0;
-  for (let i = 0; i < userOrder.length; i++) {
-    if (userOrder[i] === correctOrder[i]) {
-      score++;
-    }
-  }
-  return score;
+  const correctPositions = userOrder.map((item, index) => {
+    const isCorrect = item === correctOrder[index];
+    if (isCorrect) score++;
+    return isCorrect;
+  });
+
+  return { score, correctPositions };
 }
 
 // Function to handle the end of a round or game
@@ -90,6 +117,7 @@ export {
   startGame,
   selectRandomCategory,
   shuffleItems,
+  createCorrectOrder,
   evaluateOrder,
   handleRoundEnd,
 };

@@ -90,3 +90,8 @@
   background-color: rgba(59, 130, 246, 0.1);
   transform: scale(1.01);
 }
+
+.draggable-card.correct {
+  border: 2px solid #93c5fd; /* light blue border */
+  background-color: #eff6ff; /* very light blue background */
+}

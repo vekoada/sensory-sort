@@ -6,7 +6,7 @@ const gameData = {
       name: "Data Size",
       unit: "Bytes",
       items: [
-        { name: "Single Bit", value: 1, unit: "bit" },
+        { name: "Single Bit", value: 0.125, unit: "bit" },
         { name: "Single Character (ASCII)", value: 1, unit: "Byte" },
         { name: "Short Text Message (SMS)", value: 160, unit: "Bytes" },
         {

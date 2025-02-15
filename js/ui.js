@@ -10,15 +10,30 @@ function renderItems(items, containerElement) {
 }
 
 // Function to display feedback to the user (correct/incorrect)
-function showFeedback(isCorrect, message) {
-  // Update the UI to show whether the user's answer was correct or incorrect
-  // Display a message to the user
-  // (Could use color changes, animations, etc.)
+function showFeedback(isCorrect, message, correctPositions = []) {
+  const feedbackEl = document.getElementById("feedback");
+  feedbackEl.textContent = message;
+  feedbackEl.className = `mt-4 p-4 rounded-lg text-center ${
+    isCorrect ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+  }`;
+  feedbackEl.classList.remove("hidden");
+
+  // Add visual feedback for correct positions
+  const cards = document.querySelectorAll(".draggable-card");
+  cards.forEach((card, index) => {
+    if (correctPositions[index]) {
+      card.classList.add("correct");
+    } else {
+      card.classList.remove("correct");
+    }
+  });
 }
 
 // Function to update the score display
-function updateScoreDisplay(score) {
-  // Update the HTML element that displays the score
+function updateScoreDisplay(score, total) {
+  const scoreEl = document.getElementById("score");
+  scoreEl.textContent = `Score: ${score}/${total}`;
+  scoreEl.classList.remove("hidden");
 }
 
 // Function to display the final results
@@ -61,6 +76,16 @@ function initializePopup() {
   }, 750);
 }
 
+// Add this new function
+function createSubmitButton(onSubmit) {
+  const submitButton = document.createElement("button");
+  submitButton.textContent = "Check Order";
+  submitButton.className =
+    "mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200";
+  submitButton.addEventListener("click", onSubmit);
+  return submitButton;
+}
+
 export {
   renderItems,
   showFeedback,
@@ -69,4 +94,5 @@ export {
   displayCategoryInfo,
   initializePopup,
   hideInstructionPopup,
+  createSubmitButton,
 };
