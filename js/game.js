@@ -1,12 +1,23 @@
 // game.js - Main game logic (start, category selection, evaluation)
 
 import { gameData } from "./data.js"; // Or require('./data.js') if using CommonJS
-
+import { hideInstructionPopup } from "./ui.js";
 // Function to start a new game
 function startGame() {
-  // Initialize game state (score, round, etc.)
-  // Select a category
-  // Render the initial UI
+  // Fade out instruction popup
+  hideInstructionPopup();
+
+  // Get container for cards
+  const container = document.getElementById("card-container");
+
+  // Create and inject 7 placeholder cards
+  for (let i = 0; i < 7; i++) {
+    const card = document.createElement("div");
+    card.classList.add("draggable-card");
+    card.setAttribute("draggable", true);
+    card.textContent = `Card ${i + 1}`;
+    container.appendChild(card);
+  }
 }
 
 // Function to select a random category from the gameData

@@ -1,0 +1,89 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sensory Sorting Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/ui.js"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div
+      id="instruction-popup"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-xl p-8 max-w-md mx-4 shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">
+          Sort the Sensations!
+        </h2>
+        <div class="space-y-4 text-gray-600">
+          <p class="font-medium">
+            Welcome to the Sensory Sorting Challenge! 🎯
+          </p>
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <p class="font-medium mb-2">How to Play:</p>
+            <ul class="list-disc list-inside space-y-2">
+              <li>
+                You'll get a random category (like brightness, loudness, or
+                spiciness)
+              </li>
+              <li>
+                Drag and drop the cards to arrange them from
+                <span class="font-semibold">highest to lowest</span> value
+              </li>
+              <li>The more accurate your sorting, the higher your score!</li>
+            </ul>
+          </div>
+          <p class="italic">
+            Think carefully about the magnitude of each sensation!
+          </p>
+        </div>
+        <button
+          id="start-game"
+          class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+        >
+          <span>Start Sorting</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <header class="w-full py-4 border-b border-gray-200">
+      <h1 class="text-center text-2xl font-bold">Sensory Sorter</h1>
+      <p id="category" class="text-center text-gray-600 mt-2">
+        Category: <span id="currentCategory">Loading...</span>
+      </p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <div id="card-container" class="max-w-md mx-auto space-y-4">
+        <!-- Cards will be dynamically inserted here -->
+      </div>
+    </main>
+    <script type="module">
+      import { initializePopup, hideInstructionPopup } from "./js/ui.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initializePopup();
+
+        // Add click event listener to start button
+        document
+          .getElementById("start-game")
+          .addEventListener("click", hideInstructionPopup);
+      });
+    </script>
+  </body>
+</html>

@@ -33,10 +33,40 @@ function displayCategoryInfo(categoryName, unit) {
   // Update the HTML element with the unit of measurement
 }
 
+// Function to show the instruction popup
+function showInstructionPopup() {
+  const popup = document.getElementById("instruction-popup");
+  popup.classList.remove("hidden");
+  popup.classList.add("visible");
+}
+
+function hideInstructionPopup() {
+  const popup = document.getElementById("instruction-popup");
+  popup.classList.add("hidden");
+
+  // Remove the visible class if it exists
+  popup.classList.remove("visible");
+}
+
+// Initialize the popup with delay
+function initializePopup() {
+  const popup = document.getElementById("instruction-popup");
+  // Start with popup hidden
+  popup.classList.add("hidden");
+
+  // Show after delay
+  setTimeout(() => {
+    popup.classList.remove("hidden");
+    popup.classList.add("visible");
+  }, 750);
+}
+
 export {
   renderItems,
   showFeedback,
   updateScoreDisplay,
   showResults,
   displayCategoryInfo,
+  initializePopup,
+  hideInstructionPopup,
 };
