@@ -1,6 +1,7 @@
 // game.js - Main game logic (start, category selection, evaluation)
 
 import { gameData } from "./data.js"; // Or require('./data.js') if using CommonJS
+import { setupDragDrop } from "./drag-drop.js";
 // Function to start a new game
 function startGame() {
   // Get container for cards
@@ -24,6 +25,8 @@ function startGame() {
 
   // Create and inject cards
   createCards(items);
+
+  setupDragDrop();
 
   return correctOrder; // This will be useful later for checking answers
 }
