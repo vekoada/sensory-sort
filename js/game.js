@@ -3,6 +3,7 @@
 import { gameData } from "./data.js"; // Or require('./data.js') if using CommonJS
 import { setupDragDrop } from "./drag-drop.js";
 import { showFeedback, updateScoreDisplay, createSubmitButton } from "./ui.js";
+import { startTimer, stopTimer, formatTime } from "./timer.js";
 
 // Function to start a new game
 function startGame() {
@@ -28,6 +29,9 @@ function startGame() {
   createCards(items);
 
   setupDragDrop();
+
+  // Start the timer
+  startTimer();
 }
 
 // Function to select a random category from the gameData
@@ -76,11 +80,11 @@ function createCards(items) {
     const userOrder = Array.from(cards).map((card) => card.dataset.itemName);
     const correctOrder = createCorrectOrder(items);
     const { score, correctPositions } = evaluateOrder(userOrder, correctOrder);
-
+    const totalTime = stopTimer();
     // Show feedback
     const isCorrect = score === userOrder.length;
     const message = isCorrect
-      ? "Perfect! You got them all correct! Now you can see the actual values."
+      ? `Perfect! You got them all correct! Now you can see the actual values.`
       : `You got ${score} out of ${userOrder.length} correct. Try again!`;
 
     showFeedback(isCorrect, message, correctPositions, items);

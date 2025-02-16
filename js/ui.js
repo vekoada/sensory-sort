@@ -1,5 +1,6 @@
 // ui.js - UI manipulation functions (rendering items, feedback)
-
+// import { stopTimer, formatTime } from "./timer.js";
+import { formatTime } from "./timer.js";
 // Function to render the items in a draggable format
 function renderItems(items, containerElement) {
   // Clear the container element
@@ -12,6 +13,7 @@ function renderItems(items, containerElement) {
 // Function to display feedback to the user (correct/incorrect)
 function showFeedback(isCorrect, message, correctPositions = [], items = []) {
   const feedbackEl = document.getElementById("feedback");
+
   feedbackEl.textContent = message;
   feedbackEl.className = `mt-4 p-4 rounded-lg text-center ${
     isCorrect ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
