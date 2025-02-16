@@ -1,14 +1,4 @@
-// ui.js - UI manipulation functions (rendering items, feedback)
-// import { stopTimer, formatTime } from "./timer.js";
-import { formatTime } from "./timer.js";
-// Function to render the items in a draggable format
-function renderItems(items, containerElement) {
-  // Clear the container element
-  // Loop through the items array
-  // Create HTML elements (e.g., divs) for each item
-  // Add the necessary attributes for drag-and-drop (draggable="true", etc.)
-  // Append the item elements to the container
-}
+// ui.js
 
 // Function to display feedback to the user (correct/incorrect)
 function showFeedback(isCorrect, message, correctPositions = [], items = []) {
@@ -55,25 +45,6 @@ function updateScoreDisplay(score, total) {
   scoreEl.classList.remove("hidden");
 }
 
-// Function to display the final results
-function showResults(score) {
-  // Show the final score
-  // Display options to play again, share results, etc.
-}
-
-// Function to display the category and unit of measurement
-function displayCategoryInfo(categoryName, unit) {
-  // Update the HTML element with the category name
-  // Update the HTML element with the unit of measurement
-}
-
-// Function to show the instruction popup
-function showInstructionPopup() {
-  const popup = document.getElementById("instruction-popup");
-  popup.classList.remove("hidden");
-  popup.classList.add("visible");
-}
-
 function hideInstructionPopup() {
   const popup = document.getElementById("instruction-popup");
   popup.classList.add("hidden");
@@ -106,11 +77,8 @@ function createSubmitButton(onSubmit) {
 }
 
 export {
-  renderItems,
   showFeedback,
   updateScoreDisplay,
-  showResults,
-  displayCategoryInfo,
   initializePopup,
   hideInstructionPopup,
   createSubmitButton,

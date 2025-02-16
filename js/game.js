@@ -5,18 +5,26 @@ import { setupDragDrop } from "./drag-drop.js";
 import { showFeedback, updateScoreDisplay, createSubmitButton } from "./ui.js";
 import { startTimer, stopTimer, formatTime } from "./timer.js";
 
-// Function to start a new game
+/**
+ * Starts a new game.  This function:
+ *   - Clears the card container.
+ *   - Selects a random category and shuffles its items.
+ *   - Updates the category and unit display.
+ *   - Creates and injects cards into the container.
+ *   - Sets up drag and drop functionality.
+ *   - Starts the timer.
+ */
 function startGame() {
-  // Get container for cards
+  // Get container for cards.
   const container = document.getElementById("card-container");
-  container.innerHTML = ""; // Clear any existing cards
-  container.classList.remove("hidden"); // Show the container
+  container.innerHTML = ""; // Clear any existing cards.
+  container.classList.remove("hidden"); // Show the container.
 
-  // Get category and items, store correct order
+  // Get category and items, store correct order.
   const selectedCategory = selectRandomCategory();
   const items = shuffleItems(selectedCategory);
 
-  // Update category and unit display
+  // Update category and unit display.
   const categorySpan = document.getElementById("currentCategory");
   const unitSpan = document.getElementById("categoryUnit");
   const reminderText = document.getElementById("sortingReminder");
@@ -25,12 +33,12 @@ function startGame() {
   unitSpan.textContent = selectedCategory.unit;
   reminderText.textContent = `Sort from highest to lowest ${selectedCategory.unit}`;
 
-  // Create and inject cards
+  // Create and inject cards.
   createCards(items);
 
   setupDragDrop();
 
-  // Start the timer
+  // Start the timer.
   startTimer();
 }
 
@@ -80,9 +88,11 @@ function createCards(items) {
     const userOrder = Array.from(cards).map((card) => card.dataset.itemName);
     const correctOrder = createCorrectOrder(items);
     const { score, correctPositions } = evaluateOrder(userOrder, correctOrder);
-    const totalTime = stopTimer();
-    // Show feedback
+
+    // Only stop timer if all items are correct
     const isCorrect = score === userOrder.length;
+    const totalTime = isCorrect ? stopTimer() : null;
+
     const message = isCorrect
       ? `Perfect! You got them all correct! Now you can see the actual values.`
       : `You got ${score} out of ${userOrder.length} correct. Try again!`;
@@ -107,21 +117,10 @@ function evaluateOrder(userOrder, correctOrder) {
   return { score, correctPositions };
 }
 
-// Function to handle the end of a round or game
-function handleRoundEnd() {
-  // Logic to:
-  // 1. Update the game state (e.g., increment the round counter)
-  // 2. Display the results of the round
-  // 3. Determine if the game is over
-  // 4. If the game is over, display the final score and options to play again
-  // 5. If the game is not over, select a new category and start the next round
-}
-
 export {
   startGame,
   selectRandomCategory,
   shuffleItems,
   createCorrectOrder,
   evaluateOrder,
-  handleRoundEnd,
 };
