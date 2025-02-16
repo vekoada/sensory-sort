@@ -6,12 +6,10 @@ Sensory Sort is a simple, interactive web-based game where users drag and drop c
 
 ## Features
 
-- **Random Category Selection:** Each game round presents a randomly chosen sensory category, keeping the gameplay fresh and engaging.
-- **Drag-and-Drop Interface:** An intuitive drag-and-drop interface allows users to easily arrange the cards in their desired order.
-- **Real-time Feedback:** After submitting their arrangement, users receive immediate feedback on their accuracy, including a score and visual indicators of correct/incorrect placements.
-- **Dynamic Difficulty:** The game can be easily expanded with more categories and items to increase its complexity and replayability.
-- **Responsive Design:** The game is designed to be responsive and playable on various screen sizes and devices.
-- **Tailwind CSS styling**: Utilizes the powerful tailwind framework for a nice and modern look.
+- **Random Category Selection**
+- **Drag-and-Drop Interface**
+- **Real-time Feedback**
+- **Tailwind CSS styling**
 
 ## Getting Started
 
@@ -24,7 +22,7 @@ Sensory Sort is a simple, interactive web-based game where users drag and drop c
 
 2.  **Open `index.html` in your web browser:**
 
-    Simply open the `index.html` file in your preferred web browser (Chrome, Firefox, Safari, etc.). No server setup is required as the game is entirely client-side.
+    Simply open the `index.html` file in your preferred web browser (Chrome, Firefox, Safari, etc.). No server setup is required as the game is entirely client-side. You can also play at [sensorysort.netlify.app](https://sensorysort.netlify.app)
 
 ## Game Data (data.js)
 
