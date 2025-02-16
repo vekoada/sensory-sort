@@ -10,7 +10,7 @@ function renderItems(items, containerElement) {
 }
 
 // Function to display feedback to the user (correct/incorrect)
-function showFeedback(isCorrect, message, correctPositions = []) {
+function showFeedback(isCorrect, message, correctPositions = [], items = []) {
   const feedbackEl = document.getElementById("feedback");
   feedbackEl.textContent = message;
   feedbackEl.className = `mt-4 p-4 rounded-lg text-center ${
@@ -21,8 +21,25 @@ function showFeedback(isCorrect, message, correctPositions = []) {
   // Add visual feedback for correct positions
   const cards = document.querySelectorAll(".draggable-card");
   cards.forEach((card, index) => {
+    // Remove any existing value displays first
+    const existingValueDisplay = card.querySelector(".text-sm");
+    if (existingValueDisplay) {
+      existingValueDisplay.remove();
+    }
+
     if (correctPositions[index]) {
       card.classList.add("correct");
+      // If all correct, show the values
+      if (isCorrect) {
+        const value = items.find(
+          (item) => item.name === card.dataset.itemName
+        )?.value;
+        const unit = items[0]?.unit;
+        const valueDisplay = document.createElement("div");
+        valueDisplay.className = "text-sm text-gray-600 mt-2";
+        valueDisplay.textContent = `${value} ${unit}`;
+        card.appendChild(valueDisplay);
+      }
     } else {
       card.classList.remove("correct");
     }

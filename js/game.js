@@ -80,10 +80,10 @@ function createCards(items) {
     // Show feedback
     const isCorrect = score === userOrder.length;
     const message = isCorrect
-      ? "Perfect! You got them all correct!"
+      ? "Perfect! You got them all correct! Now you can see the actual values."
       : `You got ${score} out of ${userOrder.length} correct. Try again!`;
 
-    showFeedback(isCorrect, message, correctPositions);
+    showFeedback(isCorrect, message, correctPositions, items);
     updateScoreDisplay(score, userOrder.length);
   };
 
