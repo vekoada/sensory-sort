@@ -17,7 +17,7 @@ Sensory Sort is a simple, interactive web-based game where users drag and drop c
 
     ```bash
     git clone git@github.com:vekoada/sensory-sort.git
-    cd sensory-sorting-game
+    cd sensory-sort
     ```
 
 2.  **Open `index.html` in your web browser:**
